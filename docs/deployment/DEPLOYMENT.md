@@ -9,6 +9,7 @@ Arquitectura: **GitHub** (código) → **Vercel** (sitio estático Angular) + **
    1. `database/migrations/20261122000001_schema.sql`
    2. `database/migrations/20261122000002_rls.sql`
    3. (opcional) `database/seeds/002_demo_catalog.sql` — catálogo de demostración.
+   > Las migraciones incluyen sus propios `GRANT`, así que funcionan aunque al crear el proyecto se deje desmarcado *Grant API access to new tables automatically*.
    > Con la CLI: `supabase link --project-ref <ref>`, copia los archivos de `database/migrations/` a `supabase/migrations/` y ejecuta `supabase db push`.
 3. **Authentication → URL Configuration**
    - *Site URL*: `https://tu-dominio.vercel.app`

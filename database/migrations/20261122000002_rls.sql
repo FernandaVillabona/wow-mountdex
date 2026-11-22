@@ -42,7 +42,18 @@ create policy "farming_attempts own" on public.farming_attempts
   for all to authenticated
   using (user_id = (select auth.uid())) with check (user_id = (select auth.uid()));
 
--- Privilegios explícitos (defensa en profundidad)
+-- Privilegios explícitos. No dependen de la opción "Grant API access to new tables
+-- automatically" del proyecto: RLS decide QUÉ filas, estos GRANT deciden QUÉ operaciones.
+grant usage on schema public to anon, authenticated;
+
+-- Catálogo: solo lectura para todos.
 revoke insert, update, delete on public.expansions, public.locations, public.mounts,
   public.mount_sources, public.mount_locations, public.mount_references from anon, authenticated;
+grant select on public.expansions, public.locations, public.mounts,
+  public.mount_sources, public.mount_locations, public.mount_references to anon, authenticated;
+
+-- Datos personales: nada para anon; CRUD para usuarios autenticados (filtrado por RLS).
 revoke all on public.profiles, public.characters, public.user_mounts, public.farming_attempts from anon;
+grant select, update on public.profiles to authenticated;
+grant select, insert, update, delete on public.characters, public.user_mounts, public.farming_attempts to authenticated;
+grant usage, select on all sequences in schema public to authenticated;

@@ -16,3 +16,7 @@ supabase/.branches/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Herramientas locales
+.impeccable/
+**/.impeccable/

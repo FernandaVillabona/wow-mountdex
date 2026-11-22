@@ -20,3 +20,7 @@ Thumbs.db
 # Herramientas locales
 .impeccable/
 **/.impeccable/
+
+# Caché e informes del importador
+.cache/
+reports/

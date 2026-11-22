@@ -1,0 +1,88 @@
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<div class="device">
+  <header class="hinge">
+    <div class="lens" [class.is-busy]="ledState() === 'busy'" aria-hidden="true"><span></span></div>
+    <div class="leds" role="status" [attr.aria-label]="ledLabel()" [title]="ledLabel()">
+      <span class="led led--red" [class.on]="ledState() === 'error'"></span>
+      <span class="led led--yellow" [class.on]="ledState() === 'local'"></span>
+      <span class="led led--green" [class.on]="ledState() === 'cloud'"></span>
+    </div>
+    <a routerLink="/" class="logo" aria-label="WoW MountDex, inicio">
+      <span class="logo__wow">WoW</span><span class="logo__dex">MOUNTDEX</span>
+    </a>
+    <div class="hinge__actions">
+      <button
+        type="button"
+        class="btn btn--sm btn--icon"
+        [attr.aria-pressed]="prefs.soundOn()"
+        [attr.aria-label]="prefs.soundOn() ? 'Desactivar sonidos' : 'Activar sonidos'"
+        [title]="prefs.soundOn() ? 'Sonido activado' : 'Sonido desactivado'"
+        (click)="prefs.toggleSound()"
+      >{{ prefs.soundOn() ? '♪' : '♪̸' }}</button>
+      @if (auth.isLoggedIn()) {
+        <a class="btn btn--sm btn--gold" routerLink="/perfil">{{ auth.profile()?.username ?? 'Perfil' }}</a>
+      } @else {
+        <a class="btn btn--sm btn--light" routerLink="/login">Entrar</a>
+      }
+    </div>
+  </header>
+
+  <div class="body">
+    <nav class="pad" aria-label="Secciones">
+      <ul>
+        @for (n of nav; track n.path) {
+          <li>
+            <a
+              class="pad__btn"
+              [routerLink]="n.path"
+              routerLinkActive="is-active"
+              [routerLinkActiveOptions]="{ exact: !!n.exact }"
+              ariaCurrentWhenActive="page"
+              (click)="prefs.beep('nav')"
+            >
+              <span class="pad__glyph" aria-hidden="true">{{ n.glyph }}</span>
+              <span class="pad__label">{{ n.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+      <div class="grille" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    </nav>
+
+    <main id="main" class="screen" tabindex="-1">
+      <div class="screen__glass">
+        @switch (catalog.state()) {
+          @case ('error') {
+            <div class="notice notice--error" role="alert">
+              {{ catalog.error() }}
+              <button type="button" class="btn btn--sm" (click)="catalog.retry()">Reintentar</button>
+            </div>
+          }
+          @case ('loading') {
+            <p class="loading" role="status">Cargando catálogo<span class="blink">…</span></p>
+          }
+        }
+        @if (catalog.state() === 'ready' && catalog.catalog()?.isDemo) {
+          <p class="demo-banner">
+            <strong>Datos de demostración.</strong> {{ catalog.catalog()?.notice }}
+          </p>
+        }
+        <router-outlet />
+      </div>
+    </main>
+  </div>
+
+  <footer class="foot">
+    <span>WoW MountDex es un proyecto de fans no afiliado a Blizzard Entertainment. World of Warcraft® es marca registrada de Blizzard Entertainment, Inc.</span>
+  </footer>
+</div>
+
+<div class="toasts" aria-live="polite">
+  @for (t of toasts.toasts(); track t.id) {
+    <div class="toast" [class]="'toast toast--' + t.kind">
+      <span>{{ t.text }}</span>
+      <button type="button" class="toast__x" aria-label="Cerrar aviso" (click)="toasts.dismiss(t.id)">×</button>
+    </div>
+  }
+</div>

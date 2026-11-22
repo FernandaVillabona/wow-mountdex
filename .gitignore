@@ -1,0 +1,18 @@
+# Secretos
+.env
+.env.*
+!.env.example
+**/.env
+!**/.env.example
+
+# Generados
+frontend/src/app/core/config/runtime-config.ts
+node_modules/
+dist/
+.vercel/
+supabase/.temp/
+supabase/.branches/
+
+# Sistema
+.DS_Store
+Thumbs.db

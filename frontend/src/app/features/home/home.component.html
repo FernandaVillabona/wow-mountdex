@@ -1,0 +1,66 @@
+@if (stats(); as s) {
+  <section class="hero" aria-labelledby="home-title">
+    <div class="hero__intro">
+      <p class="dexno">REGISTRO DE MONTURAS · AZEROTH</p>
+      <h1 id="home-title">Tu MountDex</h1>
+      <p class="muted">Explora el catálogo, marca lo que ya tienes y descubre qué te falta. Funciona sin cuenta; crea una para sincronizar entre dispositivos.</p>
+      <div class="row">
+        <a class="btn btn--red" routerLink="/mountdex">Abrir MountDex</a>
+        <a class="btn btn--light" routerLink="/coleccion">Ver estadísticas</a>
+      </div>
+    </div>
+
+    <div class="lcd" role="group" aria-label="Resumen de la colección">
+      <div class="lcd__cell"><span class="lcd__num">{{ s.total }}</span><span class="lcd__lbl">Catálogo</span></div>
+      <div class="lcd__cell"><span class="lcd__num">{{ s.obtained }}</span><span class="lcd__lbl">Obtenidas</span></div>
+      <div class="lcd__cell"><span class="lcd__num">{{ s.pending }}</span><span class="lcd__lbl">Pendientes</span></div>
+      <div class="lcd__cell"><span class="lcd__num">{{ s.percent }}<small>%</small></span><span class="lcd__lbl">Completado</span></div>
+      <div class="lcd__bar"><app-progress-bar [percent]="s.percent" [obtained]="s.obtained" [total]="s.total" /></div>
+    </div>
+  </section>
+}
+
+<div class="cols">
+  <section class="panel">
+    <div class="panel__title"><h2>Objetivos actuales</h2><a class="btn btn--sm btn--light" routerLink="/objetivos">Todos</a></div>
+    <div class="panel__body">
+      <app-mount-list
+        [mounts]="targets()"
+        view="list"
+        emptyTitle="Sin objetivos"
+        emptyText="Abre una ficha y pulsa «Añadir a objetivos» para planificar tu farmeo."
+      />
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel__title"><h2>Consultadas recientemente</h2></div>
+    <div class="panel__body">
+      <app-mount-list
+        [mounts]="recent()"
+        view="compact"
+        emptyTitle="Aún no has consultado monturas"
+        emptyText="Las fichas que abras aparecerán aquí."
+      />
+    </div>
+  </section>
+</div>
+
+<section class="panel">
+  <div class="panel__title"><h2>Montura aleatoria pendiente</h2></div>
+  <div class="panel__body"><app-random-picker /></div>
+</section>
+
+<section aria-labelledby="shortcuts-title">
+  <h2 id="shortcuts-title" class="sr-only">Accesos rápidos</h2>
+  <ul class="shortcuts">
+    @for (s of shortcuts; track s.path) {
+      <li>
+        <a [routerLink]="s.path" class="shortcut">
+          <span class="shortcut__label">{{ s.label }}</span>
+          <span class="shortcut__hint">{{ s.hint }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</section>

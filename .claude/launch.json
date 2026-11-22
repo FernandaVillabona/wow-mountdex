@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mountdex",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start", "--prefix", "frontend"],
+      "port": 4200
+    },
+    {
+      "name": "mountdex-dist",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "serve:dist", "--prefix", "frontend"],
+      "port": 4300
+    }
+  ]
+}

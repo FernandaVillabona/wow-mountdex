@@ -1,0 +1,110 @@
+<p class="dexno">REGISTRO PERSONAL</p>
+<h1>Mi colección</h1>
+
+<p class="storage">
+  @if (auth.isLoggedIn()) {
+    Tu colección se guarda en la nube y se sincroniza entre dispositivos.
+    @if (collection.syncStatus() === 'error') { <span class="notice notice--error">{{ collection.lastError() }}</span> }
+  } @else {
+    Modo invitado: la colección se guarda solo en este navegador.
+    @if (auth.available) { <a routerLink="/registro">Crea una cuenta</a> para sincronizarla; tu progreso se importará sin duplicados. }
+  }
+</p>
+
+<section class="panel">
+  <div class="panel__title"><h2>Resumen</h2><span class="mono">{{ total().percent }}%</span></div>
+  <div class="panel__body">
+    <app-progress-bar label="Colección total" [percent]="total().percent" [obtained]="total().obtained" [total]="total().total" />
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel__title"><h2>Progreso por categoría</h2></div>
+  <div class="panel__body">
+    <div class="tabs" role="tablist" aria-label="Agrupar progreso por">
+      @for (t of tabs; track t.key) {
+        <button type="button" role="tab" class="btn btn--sm" [attr.aria-selected]="tab() === t.key" [attr.aria-pressed]="tab() === t.key" (click)="tab.set(t.key)">{{ t.label }}</button>
+      }
+    </div>
+    <div class="bars" role="tabpanel">
+      @for (row of breakdown(); track row.key) {
+        <app-progress-bar [label]="row.label" [percent]="row.percent" [obtained]="row.obtained" [total]="row.total" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel__title"><h2>Hitos de colección</h2><span class="mono">{{ achievedCount() }}/{{ milestones().length }}</span></div>
+  <div class="panel__body">
+    <ul class="badges">
+      @for (m of milestones(); track m.id) {
+        <li class="ms" [class.ms--on]="m.achieved">
+          <span class="ms__medal" aria-hidden="true">{{ m.achieved ? '★' : '☆' }}</span>
+          <span class="ms__text">
+            <strong>{{ m.title }}</strong>
+            <span class="faint">{{ m.description }}</span>
+            <span class="mono">{{ m.current }}/{{ m.goal }}</span>
+          </span>
+          <span class="sr-only">{{ m.achieved ? 'Conseguido' : 'Pendiente' }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<div class="cols">
+  <section class="panel">
+    <div class="panel__title"><h2>Exportar e importar</h2></div>
+    <div class="panel__body">
+      <p class="faint">Copia de seguridad de tus marcas, favoritas, objetivos, notas e intentos.</p>
+      <div class="row">
+        <button type="button" class="btn" (click)="exportJson()">Exportar JSON</button>
+        <button type="button" class="btn" (click)="exportCsv()">Exportar CSV</button>
+        <label class="btn btn--gold">
+          Importar archivo
+          <input type="file" accept=".json,.csv,application/json,text/csv" class="sr-only" #file (change)="onFile(file)" />
+        </label>
+      </div>
+
+      @if (pendingImport(); as p) {
+        <div class="confirm" role="alertdialog" aria-labelledby="imp-title">
+          <p id="imp-title"><strong>{{ p.fileName }}</strong></p>
+          @if (p.entries.length) {
+            <p>Se aplicarán <strong>{{ p.entries.length }}</strong> registros. Los registros importados sustituyen a los actuales de esas monturas.</p>
+          }
+          @if (p.skipped) { <p class="faint">{{ p.skipped }} fila(s) omitidas.</p> }
+          @for (e of p.errors; track $index) { <p class="faint">• {{ e }}</p> }
+          <div class="row">
+            @if (p.entries.length) { <button type="button" class="btn btn--green" (click)="confirmImport()">Confirmar importación</button> }
+            <button type="button" class="btn btn--light" (click)="pendingImport.set(null)">Cancelar</button>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel__title"><h2>Importar desde Battle.net</h2></div>
+    <div class="panel__body">
+      @if (blizzard.configured) {
+        <p class="faint">Conecta tu cuenta de Battle.net para marcar automáticamente las monturas que ya tienes. No guardamos tu contraseña ni tu token de Blizzard. Siempre podrás corregir la colección a mano.</p>
+        <div class="row">
+          <div class="field" style="margin:0">
+            <label for="bnet-region">Región</label>
+            <select id="bnet-region" [value]="region()" (change)="region.set($any($event.target).value)">
+              <option value="us">América (US)</option>
+              <option value="eu">Europa (EU)</option>
+              <option value="kr">Corea (KR)</option>
+              <option value="tw">Taiwán (TW)</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn--red" (click)="connectBlizzard()">Conectar con Battle.net</button>
+        </div>
+      } @else {
+        <p>La importación automática aún no está activada en esta instalación.</p>
+        <p class="faint">Falta configurar: {{ blizzard.missingConfig().join(', ') }} y desplegar la Edge Function <code>blizzard-import</code>. Mientras tanto, el registro manual funciona con normalidad.</p>
+      }
+    </div>
+  </section>
+</div>

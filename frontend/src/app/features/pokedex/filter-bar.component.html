@@ -1,0 +1,122 @@
+<div class="fb" role="search">
+  <div class="fb__top">
+    <div class="fb__search">
+      <label for="f-text" class="sr-only">Buscar montura</label>
+      <span class="fb__icon" aria-hidden="true">⌕</span>
+      <input
+        id="f-text"
+        type="search"
+        placeholder="Nombre, nº, jefe, NPC, zona, instancia…"
+        autocomplete="off"
+        [value]="f().text"
+        (input)="set('text', val($event))"
+      />
+    </div>
+    <div class="fb__sort">
+      <label for="f-sort" class="sr-only">Ordenar por</label>
+      <select id="f-sort" [value]="f().sort" (change)="set('sort', asSort(val($event)))">
+        @for (s of sorts; track s[0]) { <option [value]="s[0]" [selected]="f().sort === s[0]">Orden: {{ s[1] }}</option> }
+      </select>
+      <button
+        type="button"
+        class="btn btn--sm btn--icon"
+        [attr.aria-label]="f().sortDir === 'asc' ? 'Orden ascendente (cambiar a descendente)' : 'Orden descendente (cambiar a ascendente)'"
+        (click)="set('sortDir', f().sortDir === 'asc' ? 'desc' : 'asc')"
+      >{{ f().sortDir === 'asc' ? '▲' : '▼' }}</button>
+    </div>
+    <button
+      type="button"
+      class="btn btn--sm"
+      [attr.aria-expanded]="open()"
+      aria-controls="fb-advanced"
+      (click)="open.set(!open())"
+    >
+      Filtros @if (state.activeCount()) { <span class="fb__count">{{ state.activeCount() }}</span> }
+    </button>
+    @if (state.activeCount()) {
+      <button type="button" class="btn btn--sm btn--light" (click)="state.reset()">Limpiar</button>
+    }
+  </div>
+
+  <div class="fb__status" role="group" aria-label="Estado de colección">
+    @for (s of [['all','Todas'],['obtained','Obtenidas'],['pending','Pendientes']]; track s[0]) {
+      <button type="button" class="btn btn--sm" [attr.aria-pressed]="f().status === s[0]" (click)="set('status', asStatus(s[0]))">{{ s[1] }}</button>
+    }
+    <label class="check"><input type="checkbox" [checked]="f().favoritesOnly" (change)="set('favoritesOnly', checked($event))" /> ★ Favoritas</label>
+    <label class="check"><input type="checkbox" [checked]="f().targetsOnly" (change)="set('targetsOnly', checked($event))" /> ◎ Objetivos</label>
+  </div>
+
+  @if (open()) {
+    <div class="fb__grid" id="fb-advanced">
+      <div class="field">
+        <label for="f-exp">Expansión</label>
+        <select id="f-exp" (change)="set('expansionId', num(val($event)))">
+          <option value="" [selected]="f().expansionId === null">Todas</option>
+          @for (e of catalog.expansions(); track e.id) {
+            <option [value]="e.id" [selected]="f().expansionId === e.id">{{ e.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-cont">Continente</label>
+        <select id="f-cont" (change)="set('continent', str(val($event)))">
+          <option value="" [selected]="!f().continent">Todos</option>
+          @for (c of continents(); track c) { <option [value]="c" [selected]="f().continent === c">{{ c }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-zone">Zona</label>
+        <select id="f-zone" (change)="set('zone', str(val($event)))">
+          <option value="" [selected]="!f().zone">Todas</option>
+          @for (z of zones(); track z) { <option [value]="z" [selected]="f().zone === z">{{ z }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-inst">Mazmorra / banda</label>
+        <select id="f-inst" (change)="set('instance', str(val($event)))">
+          <option value="" [selected]="!f().instance">Todas</option>
+          @for (i of instances(); track i) { <option [value]="i" [selected]="f().instance === i">{{ i }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-method">Método</label>
+        <select id="f-method" (change)="set('method', asMethod(val($event)))">
+          <option value="" [selected]="!f().method">Todos</option>
+          @for (m of methods; track m[0]) { <option [value]="m[0]" [selected]="f().method === m[0]">{{ m[1] }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-prob">Probabilidad de drop</label>
+        <select id="f-prob" (change)="set('probability', asProb(val($event)))">
+          @for (p of probabilities; track p[0]) { <option [value]="p[0]" [selected]="f().probability === p[0]">{{ p[1] }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-rarity">Rareza</label>
+        <select id="f-rarity" (change)="set('rarity', asRarity(val($event)))">
+          <option value="" [selected]="!f().rarity">Todas</option>
+          @for (r of rarities; track r[0]) { <option [value]="r[0]" [selected]="f().rarity === r[0]">{{ r[1] }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-diff">Dificultad</label>
+        <select id="f-diff" (change)="set('difficulty', asDifficulty(val($event)))">
+          <option value="" [selected]="!f().difficulty">Todas</option>
+          @for (d of difficulties; track d[0]) { <option [value]="d[0]" [selected]="f().difficulty === d[0]">{{ d[1] }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-avail">Disponibilidad</label>
+        <select id="f-avail" (change)="set('availability', asAvailability(val($event)))">
+          <option value="" [selected]="!f().availability">Todas</option>
+          @for (a of availabilities; track a[0]) { <option [value]="a[0]" [selected]="f().availability === a[0]">{{ a[1] }}</option> }
+        </select>
+      </div>
+      <div class="fb__checks">
+        <label class="check"><input type="checkbox" [checked]="f().secretOnly" (change)="set('secretOnly', checked($event))" /> Solo secretas</label>
+        <label class="check"><input type="checkbox" [checked]="f().limitedAttemptsOnly" (change)="set('limitedAttemptsOnly', checked($event))" /> Intentos limitados</label>
+        <label class="check"><input type="checkbox" [checked]="f().weeklyLockoutOnly" (change)="set('weeklyLockoutOnly', checked($event))" /> Bloqueo semanal</label>
+      </div>
+    </div>
+  }
+</div>

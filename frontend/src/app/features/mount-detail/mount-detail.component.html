@@ -1,0 +1,172 @@
+@if (mount(); as m) {
+  @let st = state()!;
+  @let exp = expansion();
+
+  <nav class="pager" aria-label="Navegación entre fichas">
+    @if (nav().prev; as p) {
+      <a class="btn btn--sm" [routerLink]="['/montura', p.slug]" (click)="prefs.beep('nav')">◀ #{{ pad(p.id) }} <span class="pager__name">{{ p.name }}</span></a>
+    } @else { <span></span> }
+    <a class="btn btn--sm btn--light" routerLink="/mountdex">Volver a la MountDex</a>
+    @if (nav().next; as n) {
+      <a class="btn btn--sm" [routerLink]="['/montura', n.slug]" (click)="prefs.beep('nav')"><span class="pager__name">{{ n.name }}</span> #{{ pad(n.id) }} ▶</a>
+    } @else { <span></span> }
+  </nav>
+
+  <article class="entry" [attr.aria-labelledby]="'mount-' + m.id">
+    <section class="entry__card">
+      <div class="entry__portrait">
+        <app-mount-sprite [mount]="m" [obtained]="st.obtained" [color]="exp?.color ?? '#7a7a7a'" [size]="168" [large]="true" />
+        <span class="entry__state" [class.on]="st.obtained">{{ st.obtained ? 'OBTENIDA' : 'PENDIENTE' }}</span>
+      </div>
+      <div class="entry__id">
+        <p class="dexno">Nº {{ pad(m.id) }}</p>
+        <h1 [id]="'mount-' + m.id">{{ m.name }}</h1>
+        <div class="row">
+          <span class="badge badge--exp" [style.background]="exp?.color ?? '#7a7a7a'">{{ exp?.name ?? 'Expansión sin clasificar' }}</span>
+          <span class="badge">{{ L.type[m.mountType] }}</span>
+          @for (k of m.methods; track k) { <a class="badge badge--red" [routerLink]="['/metodos', k]">{{ L.method[k] }}</a> }
+        </div>
+        @if (m.description) { <p class="entry__desc">{{ m.description }}</p> }
+        @else { <p class="entry__desc unknown">Sin descripción oficial importada todavía.</p> }
+
+        <div class="entry__actions" role="group" aria-label="Registro de colección">
+          <button type="button" class="btn" [class.btn--green]="!st.obtained" [attr.aria-pressed]="st.obtained" (click)="toggle('obtained')">
+            {{ st.obtained ? '✓ Obtenida' : 'Marcar como obtenida' }}
+          </button>
+          @if (st.obtained) {
+            <button type="button" class="btn btn--light" (click)="toggle('obtained')">Marcar como pendiente</button>
+          }
+          <button type="button" class="btn" [attr.aria-pressed]="st.favorite" (click)="toggle('favorite')">★ {{ st.favorite ? 'Favorita' : 'Añadir a favoritas' }}</button>
+          <button type="button" class="btn" [attr.aria-pressed]="st.target" (click)="toggle('target')">◎ {{ st.target ? 'En objetivos' : 'Añadir a objetivos' }}</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="entry__grid">
+      <section class="panel">
+        <div class="panel__title"><h2>Información general</h2></div>
+        <dl class="dl">
+          <dt>Nº registro</dt><dd>#{{ pad(m.id) }}</dd>
+          <dt>ID Blizzard</dt><dd>@if (m.blizzardId) { {{ m.blizzardId }} } @else { <span class="unknown">No importado</span> }</dd>
+          <dt>Tipo</dt><dd>{{ L.type[m.mountType] }}</dd>
+          <dt>Expansión</dt><dd>{{ exp?.name ?? 'Sin clasificar' }}</dd>
+          <dt>Disponibilidad</dt><dd [class.unknown]="m.availability === 'unknown'">{{ L.availability[m.availability] }}</dd>
+          <dt>Rareza</dt><dd>@if (m.rarity) { {{ L.rarity[m.rarity] }} } @else { <span class="unknown">Sin clasificar</span> }</dd>
+          <dt>Facción</dt><dd>{{ m.faction === 'alliance' ? 'Alianza' : m.faction === 'horde' ? 'Horda' : 'Ambas / no indicado' }}</dd>
+          <dt>Modelo 3D</dt><dd><span class="unknown">Vista previa no disponible</span></dd>
+        </dl>
+      </section>
+
+      <section class="panel">
+        <div class="panel__title"><h2>Probabilidad y dificultad</h2></div>
+        <div class="panel__body">
+          <div class="prob" [class.prob--unknown]="m.probability.percentage === null">
+            <span class="prob__value">{{ m.probability.percentage === null ? '¿?' : m.probability.percentage + '%' }}</span>
+            <span class="prob__status">{{ L.probability[m.probability.status] }}</span>
+          </div>
+          <dl class="dl">
+            <dt>Fuente</dt><dd>@if (m.probability.source) { {{ m.probability.source }} } @else { <span class="unknown">—</span> }</dd>
+            <dt>Intentos medios</dt><dd>@if (m.probability.knownAttempts) { {{ m.probability.knownAttempts }} } @else { <span class="unknown">Desconocido</span> }</dd>
+            <dt>Bloqueo</dt><dd>{{ m.lockout === 'weekly' ? 'Semanal' : m.lockout === 'daily' ? 'Diario' : m.lockout === 'none' ? 'Sin bloqueo' : 'No verificado' }}</dd>
+            <dt>Intentos limitados</dt><dd>{{ m.limitedAttempts ? 'Sí' : 'No indicado' }}</dd>
+            <dt>Dificultad de farmeo</dt><dd>@if (m.difficulty) { {{ L.difficulty[m.difficulty] }} } @else { <span class="unknown">Sin clasificar</span> }</dd>
+          </dl>
+          <p class="faint">La rareza y la probabilidad de drop son datos distintos. Solo se muestran porcentajes con fuente.</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="panel__title"><h2>Obtención</h2></div>
+      <div class="panel__body">
+        @for (s of m.sources; track $index) {
+          <dl class="dl source">
+            <dt>Método</dt><dd>{{ L.method[s.sourceType] }}</dd>
+            @if (s.bossName) { <dt>Jefe</dt><dd>{{ s.bossName }}</dd> }
+            @if (s.npcName) { <dt>NPC</dt><dd>{{ s.npcName }}</dd> }
+            @if (s.vendorName) { <dt>Vendedor</dt><dd>{{ s.vendorName }}</dd> }
+            @if (s.achievementName) { <dt>Logro</dt><dd>{{ s.achievementName }}</dd> }
+            @if (s.reputationRequirement) { <dt>Reputación</dt><dd>{{ s.reputationRequirement }}</dd> }
+            @if (s.currencyRequirement) { <dt>Moneda</dt><dd>{{ s.currencyRequirement }}</dd> }
+            @if (s.requirements) { <dt>Requisitos</dt><dd>{{ s.requirements }}</dd> }
+            @if (s.instructions) { <dt>Guía</dt><dd>{{ s.instructions }}</dd> }
+            @if (s.sourceUrl) { <dt>Fuente</dt><dd><a [href]="s.sourceUrl" target="_blank" rel="noopener noreferrer">{{ s.sourceUrl }}</a></dd> }
+          </dl>
+        } @empty {
+          <p class="unknown">No hay método de obtención verificado.</p>
+        }
+        @if (m.tips) { <p><strong>Consejos:</strong> {{ m.tips }}</p> }
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__title"><h2>Ubicación</h2></div>
+      <div class="panel__body">
+        @for (l of locations(); track l.id) {
+          <dl class="dl source">
+            <dt>Continente</dt><dd>{{ l.continent }}</dd>
+            <dt>Zona</dt><dd><a [routerLink]="['/regiones', l.continent, l.zone]">{{ l.zone }}</a></dd>
+            @if (l.dungeon) { <dt>Mazmorra</dt><dd>{{ l.dungeon }}</dd> }
+            @if (l.raid) { <dt>Banda</dt><dd>{{ l.raid }}</dd> }
+            <dt>Coordenadas</dt><dd>@if (l.coordinates) { {{ l.coordinates }} } @else { <span class="unknown">No verificadas</span> }</dd>
+          </dl>
+        } @empty {
+          <p class="unknown">Sin ubicación única verificada (puede obtenerse en varias zonas o mediante un proceso fuera del mapa).</p>
+        }
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__title"><h2>Mi registro</h2></div>
+      <div class="panel__body mine">
+        <div class="field">
+          <label for="obtained-at">Fecha de obtención</label>
+          <input
+            id="obtained-at"
+            type="date"
+            [max]="today"
+            [disabled]="!st.obtained"
+            [value]="dateInput(st.obtainedAt)"
+            (change)="setObtainedDate($any($event.target).value)"
+          />
+          @if (!st.obtained) { <span class="faint">Marca la montura como obtenida para registrar la fecha.</span> }
+        </div>
+        <div class="field">
+          <span class="field__label" id="attempts-label">Intentos de farmeo</span>
+          <div class="row" role="group" aria-labelledby="attempts-label">
+            <button type="button" class="btn btn--sm btn--icon" aria-label="Restar un intento" [disabled]="st.attempts === 0" (click)="attempt(-1)">−</button>
+            <output class="attempts" aria-live="polite">{{ st.attempts }}</output>
+            <button type="button" class="btn btn--sm btn--icon" aria-label="Sumar un intento" (click)="attempt(1)">+</button>
+          </div>
+          @if (st.lastAttemptAt) { <span class="faint">Último intento: {{ formatDate(st.lastAttemptAt) }}</span> }
+        </div>
+        <div class="field mine__notes">
+          <label for="notes">Notas personales</label>
+          <textarea id="notes" maxlength="2000" #notes [value]="st.notes" (blur)="saveNotes(notes.value)" placeholder="Estrategia, grupo, personaje con el que farmeas…"></textarea>
+          <span class="faint">Se guarda al salir del campo · máximo 2000 caracteres</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__title"><h2>Fuentes y verificación</h2></div>
+      <div class="panel__body">
+        <p>
+          Última verificación:
+          @if (m.verifiedAt) { <strong>{{ formatDate(m.verifiedAt) }}</strong> }
+          @else { <span class="badge badge--unknown">Pendiente de verificación</span> }
+          @if (m.isDemo) { <span class="badge badge--gold">Dato de demostración</span> }
+        </p>
+        <ul class="refs">
+          @for (r of m.references; track r.url) {
+            <li><a [href]="r.url" target="_blank" rel="noopener noreferrer">{{ r.label }} ↗</a></li>
+          }
+        </ul>
+      </div>
+    </section>
+  </article>
+} @else {
+  <app-empty-state title="Montura no encontrada" text="No existe ninguna montura con esa dirección en el catálogo actual.">
+    <a class="btn btn--red" routerLink="/mountdex">Ir a la MountDex</a>
+  </app-empty-state>
+}

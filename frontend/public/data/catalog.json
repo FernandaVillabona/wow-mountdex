@@ -1,0 +1,1893 @@
+{
+  "version": "demo-1",
+  "isDemo": true,
+  "generatedAt": "2026-11-22T12:23:39.829Z",
+  "notice": "Selección reducida de monturas, pendiente de verificación y sin probabilidades de drop. El catálogo completo se carga con el importador oficial de Blizzard.",
+  "expansions": [
+    {
+      "id": 1,
+      "slug": "classic",
+      "name": "Classic",
+      "shortName": "WoW",
+      "sortOrder": 1,
+      "releaseDate": "2004-11-23",
+      "description": null,
+      "color": "#c9a227",
+      "imageUrl": null
+    },
+    {
+      "id": 2,
+      "slug": "the-burning-crusade",
+      "name": "The Burning Crusade",
+      "shortName": "TBC",
+      "sortOrder": 2,
+      "releaseDate": "2007-01-16",
+      "description": null,
+      "color": "#3f9b3f",
+      "imageUrl": null
+    },
+    {
+      "id": 3,
+      "slug": "wrath-of-the-lich-king",
+      "name": "Wrath of the Lich King",
+      "shortName": "WotLK",
+      "sortOrder": 3,
+      "releaseDate": "2008-11-13",
+      "description": null,
+      "color": "#4a90c8",
+      "imageUrl": null
+    },
+    {
+      "id": 4,
+      "slug": "cataclysm",
+      "name": "Cataclysm",
+      "shortName": "Cata",
+      "sortOrder": 4,
+      "releaseDate": "2010-12-07",
+      "description": null,
+      "color": "#c8502a",
+      "imageUrl": null
+    },
+    {
+      "id": 5,
+      "slug": "mists-of-pandaria",
+      "name": "Mists of Pandaria",
+      "shortName": "MoP",
+      "sortOrder": 5,
+      "releaseDate": "2012-09-25",
+      "description": null,
+      "color": "#2e9e83",
+      "imageUrl": null
+    },
+    {
+      "id": 6,
+      "slug": "warlords-of-draenor",
+      "name": "Warlords of Draenor",
+      "shortName": "WoD",
+      "sortOrder": 6,
+      "releaseDate": "2014-11-13",
+      "description": null,
+      "color": "#8a5a2b",
+      "imageUrl": null
+    },
+    {
+      "id": 7,
+      "slug": "legion",
+      "name": "Legion",
+      "shortName": "Legion",
+      "sortOrder": 7,
+      "releaseDate": "2016-08-30",
+      "description": null,
+      "color": "#55b832",
+      "imageUrl": null
+    },
+    {
+      "id": 8,
+      "slug": "battle-for-azeroth",
+      "name": "Battle for Azeroth",
+      "shortName": "BfA",
+      "sortOrder": 8,
+      "releaseDate": "2018-08-14",
+      "description": null,
+      "color": "#2f5fa8",
+      "imageUrl": null
+    },
+    {
+      "id": 9,
+      "slug": "shadowlands",
+      "name": "Shadowlands",
+      "shortName": "SL",
+      "sortOrder": 9,
+      "releaseDate": "2020-11-23",
+      "description": null,
+      "color": "#6b6f8a",
+      "imageUrl": null
+    },
+    {
+      "id": 10,
+      "slug": "dragonflight",
+      "name": "Dragonflight",
+      "shortName": "DF",
+      "sortOrder": 10,
+      "releaseDate": "2022-11-28",
+      "description": null,
+      "color": "#c0392b",
+      "imageUrl": null
+    },
+    {
+      "id": 11,
+      "slug": "the-war-within",
+      "name": "The War Within",
+      "shortName": "TWW",
+      "sortOrder": 11,
+      "releaseDate": "2024-08-26",
+      "description": null,
+      "color": "#b07d2b",
+      "imageUrl": null
+    },
+    {
+      "id": 12,
+      "slug": "midnight",
+      "name": "Midnight",
+      "shortName": "MN",
+      "sortOrder": 12,
+      "releaseDate": null,
+      "description": null,
+      "color": "#6d3fa8",
+      "imageUrl": null
+    },
+    {
+      "id": 99,
+      "slug": "additional-content",
+      "name": "Contenido adicional",
+      "shortName": "Extra",
+      "sortOrder": 99,
+      "releaseDate": null,
+      "description": null,
+      "color": "#7a7a7a",
+      "imageUrl": null
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "continent": "Reinos del Este",
+      "region": null,
+      "zone": "Northern Stranglethorn",
+      "dungeon": null,
+      "raid": "Zul'Gurub",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 2,
+      "continent": "Reinos del Este",
+      "region": null,
+      "zone": "Deadwind Pass",
+      "dungeon": null,
+      "raid": "Karazhan",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 3,
+      "continent": "Terrallende",
+      "region": null,
+      "zone": "Netherstorm",
+      "dungeon": null,
+      "raid": "Tempest Keep: The Eye",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 4,
+      "continent": "Terrallende",
+      "region": null,
+      "zone": "Terokkar Forest",
+      "dungeon": "Sethekk Halls",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 5,
+      "continent": "Reinos del Este",
+      "region": null,
+      "zone": "Isle of Quel'Danas",
+      "dungeon": "Magisters' Terrace",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 6,
+      "continent": "Rasganorte",
+      "region": null,
+      "zone": "Icecrown",
+      "dungeon": null,
+      "raid": "Icecrown Citadel",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 7,
+      "continent": "Rasganorte",
+      "region": null,
+      "zone": "The Storm Peaks",
+      "dungeon": null,
+      "raid": "Ulduar",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 8,
+      "continent": "Rasganorte",
+      "region": null,
+      "zone": "Howling Fjord",
+      "dungeon": "Utgarde Pinnacle",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 9,
+      "continent": "Rasganorte",
+      "region": null,
+      "zone": "Borean Tundra",
+      "dungeon": null,
+      "raid": "The Eye of Eternity",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 10,
+      "continent": "Rasganorte",
+      "region": null,
+      "zone": "The Storm Peaks",
+      "dungeon": null,
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 11,
+      "continent": "Kalimdor",
+      "region": null,
+      "zone": "Uldum",
+      "dungeon": "The Vortex Pinnacle",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 12,
+      "continent": "Kalimdor",
+      "region": null,
+      "zone": "Uldum",
+      "dungeon": null,
+      "raid": "Throne of the Four Winds",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 13,
+      "continent": "Infralar",
+      "region": null,
+      "zone": "Deepholm",
+      "dungeon": "The Stonecore",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 14,
+      "continent": "Pandaria",
+      "region": null,
+      "zone": "Kun-Lai Summit",
+      "dungeon": null,
+      "raid": "Mogu'shan Vaults",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 15,
+      "continent": "Pandaria",
+      "region": null,
+      "zone": "Kun-Lai Summit",
+      "dungeon": null,
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 16,
+      "continent": "Pandaria",
+      "region": null,
+      "zone": "Vale of Eternal Blossoms",
+      "dungeon": null,
+      "raid": "Siege of Orgrimmar",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 17,
+      "continent": "Draenor",
+      "region": null,
+      "zone": "Gorgrond",
+      "dungeon": null,
+      "raid": "Blackrock Foundry",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 18,
+      "continent": "Draenor",
+      "region": null,
+      "zone": "Tanaan Jungle",
+      "dungeon": null,
+      "raid": "Hellfire Citadel",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 19,
+      "continent": "Reinos del Este",
+      "region": null,
+      "zone": "Deadwind Pass",
+      "dungeon": "Return to Karazhan",
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 20,
+      "continent": "Islas Abruptas",
+      "region": null,
+      "zone": "Suramar",
+      "dungeon": null,
+      "raid": "The Nighthold",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 21,
+      "continent": "Zandalar",
+      "region": null,
+      "zone": "Zuldazar",
+      "dungeon": null,
+      "raid": "Battle of Dazar'alor",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 22,
+      "continent": "Tierras Sombrías",
+      "region": null,
+      "zone": "The Maw",
+      "dungeon": null,
+      "raid": "Sanctum of Domination",
+      "mapId": null,
+      "coordinates": null
+    },
+    {
+      "id": 23,
+      "continent": "Islas Dragón",
+      "region": null,
+      "zone": "The Waking Shores",
+      "dungeon": null,
+      "raid": null,
+      "mapId": null,
+      "coordinates": null
+    }
+  ],
+  "mounts": [
+    {
+      "id": 1,
+      "blizzardId": null,
+      "slug": "swift-razzashi-raptor",
+      "name": "Swift Razzashi Raptor",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 1,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unavailable",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Bloodlord Mandokir",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Versión original de Zul'Gurub (retirada con Cataclysm).",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        1
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Swift%20Razzashi%20Raptor"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Swift%20Razzashi%20Raptor"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 2,
+      "blizzardId": null,
+      "slug": "swift-zulian-tiger",
+      "name": "Swift Zulian Tiger",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 1,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unavailable",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "High Priest Thekal",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Versión original de Zul'Gurub (retirada con Cataclysm).",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        1
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Swift%20Zulian%20Tiger"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Swift%20Zulian%20Tiger"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 3,
+      "blizzardId": null,
+      "slug": "fiery-warhorse",
+      "name": "Fiery Warhorse",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 2,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Attumen the Huntsman",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        2
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Fiery%20Warhorse"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Fiery%20Warhorse"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 4,
+      "blizzardId": null,
+      "slug": "ashes-of-alar",
+      "name": "Ashes of Al'ar",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 2,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Kael'thas Sunstrider",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        3
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Ashes%20of%20Al'ar"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Ashes%20of%20Al'ar"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 5,
+      "blizzardId": null,
+      "slug": "raven-lord",
+      "name": "Raven Lord",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 2,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Anzu",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad heroica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        4
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Raven%20Lord"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Raven%20Lord"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 6,
+      "blizzardId": null,
+      "slug": "swift-white-hawkstrider",
+      "name": "Swift White Hawkstrider",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 2,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Kael'thas Sunstrider",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad heroica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        5
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Swift%20White%20Hawkstrider"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Swift%20White%20Hawkstrider"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 7,
+      "blizzardId": null,
+      "slug": "invincible",
+      "name": "Invincible",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "The Lich King",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "25 jugadores, dificultad heroica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        6
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Invincible"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Invincible"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 8,
+      "blizzardId": null,
+      "slug": "mimirons-head",
+      "name": "Mimiron's Head",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Yogg-Saron",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "25 jugadores.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        7
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Mimiron's%20Head"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Mimiron's%20Head"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 9,
+      "blizzardId": null,
+      "slug": "blue-proto-drake",
+      "name": "Blue Proto-Drake",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Skadi the Ruthless",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad heroica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        8
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Blue%20Proto-Drake"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Blue%20Proto-Drake"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 10,
+      "blizzardId": null,
+      "slug": "blue-drake",
+      "name": "Blue Drake",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Malygos",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        9
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Blue%20Drake"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Blue%20Drake"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 11,
+      "blizzardId": null,
+      "slug": "white-polar-bear",
+      "name": "White Polar Bear",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "quest",
+        "random_drop"
+      ],
+      "sources": [
+        {
+          "sourceType": "quest",
+          "npcName": null,
+          "bossName": null,
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": "Recompensa aleatoria de las misiones diarias de los Hyldnir (Brunnhildar Village).",
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        10
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=White%20Polar%20Bear"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=White%20Polar%20Bear"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 12,
+      "blizzardId": null,
+      "slug": "sea-turtle",
+      "name": "Sea Turtle",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 3,
+      "mountType": "aquatic",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "profession",
+        "random_drop"
+      ],
+      "sources": [
+        {
+          "sourceType": "profession",
+          "npcName": null,
+          "bossName": null,
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Pesca.",
+          "instructions": "Se obtiene pescando en bancos de peces.",
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Sea%20Turtle"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Sea%20Turtle"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 13,
+      "blizzardId": null,
+      "slug": "drake-of-the-north-wind",
+      "name": "Drake of the North Wind",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 4,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Altairus",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        11
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Drake%20of%20the%20North%20Wind"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Drake%20of%20the%20North%20Wind"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 14,
+      "blizzardId": null,
+      "slug": "drake-of-the-south-wind",
+      "name": "Drake of the South Wind",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 4,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Al'Akir",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        12
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Drake%20of%20the%20South%20Wind"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Drake%20of%20the%20South%20Wind"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 15,
+      "blizzardId": null,
+      "slug": "vitreous-stone-drake",
+      "name": "Vitreous Stone Drake",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 4,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Slabhide",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        13
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Vitreous%20Stone%20Drake"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Vitreous%20Stone%20Drake"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 16,
+      "blizzardId": null,
+      "slug": "astral-cloud-serpent",
+      "name": "Astral Cloud Serpent",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 5,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Elegon",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        14
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Astral%20Cloud%20Serpent"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Astral%20Cloud%20Serpent"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 17,
+      "blizzardId": null,
+      "slug": "heavenly-onyx-cloud-serpent",
+      "name": "Heavenly Onyx Cloud Serpent",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 5,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "world_boss"
+      ],
+      "sources": [
+        {
+          "sourceType": "world_boss",
+          "npcName": null,
+          "bossName": "Sha of Anger",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        15
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Heavenly%20Onyx%20Cloud%20Serpent"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Heavenly%20Onyx%20Cloud%20Serpent"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 18,
+      "blizzardId": null,
+      "slug": "korkron-juggernaut",
+      "name": "Kor'kron Juggernaut",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 5,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Garrosh Hellscream",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        16
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Kor'kron%20Juggernaut"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Kor'kron%20Juggernaut"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 19,
+      "blizzardId": null,
+      "slug": "ironhoof-destroyer",
+      "name": "Ironhoof Destroyer",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 6,
+      "mountType": "ground",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Blackhand",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        17
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Ironhoof%20Destroyer"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Ironhoof%20Destroyer"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 20,
+      "blizzardId": null,
+      "slug": "felsteel-annihilator",
+      "name": "Felsteel Annihilator",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 6,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Archimonde",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        18
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Felsteel%20Annihilator"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Felsteel%20Annihilator"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 21,
+      "blizzardId": null,
+      "slug": "midnights-eternal-reins",
+      "name": "Midnight's Eternal Reins",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 7,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "dungeon"
+      ],
+      "sources": [
+        {
+          "sourceType": "dungeon",
+          "npcName": null,
+          "bossName": "Attumen the Huntsman",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        19
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Midnight's%20Eternal%20Reins"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Midnight's%20Eternal%20Reins"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 22,
+      "blizzardId": null,
+      "slug": "living-infernal-core",
+      "name": "Living Infernal Core",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 7,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Gul'dan",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        20
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Living%20Infernal%20Core"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Living%20Infernal%20Core"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 23,
+      "blizzardId": null,
+      "slug": "lucid-nightmare",
+      "name": "Lucid Nightmare",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 7,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "secret"
+      ],
+      "sources": [
+        {
+          "sourceType": "secret",
+          "npcName": null,
+          "bossName": null,
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": "Montura secreta: se obtiene resolviendo una cadena de acertijos repartida por Azeroth. Consulta las referencias.",
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Lucid%20Nightmare"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Lucid%20Nightmare"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 24,
+      "blizzardId": null,
+      "slug": "riddlers-mind-worm",
+      "name": "Riddler's Mind-Worm",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 7,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "secret"
+      ],
+      "sources": [
+        {
+          "sourceType": "secret",
+          "npcName": null,
+          "bossName": null,
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": "Montura secreta: requiere encontrar una serie de páginas ocultas. Consulta las referencias.",
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Riddler's%20Mind-Worm"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Riddler's%20Mind-Worm"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 25,
+      "blizzardId": null,
+      "slug": "gmod",
+      "name": "G.M.O.D.",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 8,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Lady Jaina Proudmoore",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        21
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=G.M.O.D."
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=G.M.O.D."
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 26,
+      "blizzardId": null,
+      "slug": "vengeances-reins",
+      "name": "Vengeance's Reins",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 9,
+      "mountType": "flying",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": "weekly",
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "raid"
+      ],
+      "sources": [
+        {
+          "sourceType": "raid",
+          "npcName": null,
+          "bossName": "Sylvanas Windrunner",
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": "Dificultad mítica.",
+          "instructions": null,
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        22
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Vengeance's%20Reins"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Vengeance's%20Reins"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    },
+    {
+      "id": 27,
+      "blizzardId": null,
+      "slug": "renewed-proto-drake",
+      "name": "Renewed Proto-Drake",
+      "description": null,
+      "iconUrl": null,
+      "imageUrl": null,
+      "expansionId": 10,
+      "mountType": "skyriding",
+      "rarity": null,
+      "difficulty": null,
+      "availability": "unknown",
+      "lockout": null,
+      "limitedAttempts": false,
+      "faction": null,
+      "methods": [
+        "quest"
+      ],
+      "sources": [
+        {
+          "sourceType": "quest",
+          "npcName": null,
+          "bossName": null,
+          "vendorName": null,
+          "achievementName": null,
+          "reputationRequirement": null,
+          "currencyRequirement": null,
+          "requirements": null,
+          "instructions": "Se obtiene durante las misiones iniciales de surcacielos en The Waking Shores.",
+          "sourceUrl": null
+        }
+      ],
+      "locationIds": [
+        23
+      ],
+      "probability": {
+        "percentage": null,
+        "status": "unknown",
+        "source": null,
+        "knownAttempts": null
+      },
+      "tips": null,
+      "references": [
+        {
+          "label": "Warcraft Wiki (búsqueda)",
+          "url": "https://warcraft.wiki.gg/wiki/Special:Search?search=Renewed%20Proto-Drake"
+        },
+        {
+          "label": "Wowhead (búsqueda)",
+          "url": "https://www.wowhead.com/search?q=Renewed%20Proto-Drake"
+        }
+      ],
+      "verifiedAt": null,
+      "isDemo": true
+    }
+  ]
+}

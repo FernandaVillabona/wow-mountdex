@@ -1,0 +1,45 @@
+.hero {
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: stretch; margin-bottom: 1rem;
+}
+.hero__intro h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); margin-top: 0.2rem; }
+
+.lcd {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; min-width: 0;
+  background: var(--bezel); border: 3px solid var(--bezel); border-radius: 4px;
+  align-self: start;
+}
+.lcd__cell {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+  padding: 0.9rem 0.3rem;
+  background: #213a1e; color: #a8e08a;
+  text-shadow: 0 0 6px rgba(168, 224, 138, 0.5);
+}
+.lcd__num { font-family: var(--font-logo); font-size: clamp(0.95rem, 2.4vw, 1.35rem); small { font-size: 0.6em; } }
+.lcd__lbl { font-family: var(--font-ui); font-size: 0.7rem; max-width: 100%; overflow-wrap: anywhere; text-align: center; text-transform: uppercase; letter-spacing: 0.06em; color: #7fb56a; }
+.lcd__bar { grid-column: 1 / -1; padding: 0.4rem 0.5rem 0.5rem; background: #213a1e; }
+
+.cols { display: grid; gap: 0 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.shortcuts {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 0.5rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+.shortcut {
+  display: flex; flex-direction: column; gap: 0.15rem; height: 100%;
+  padding: 0.6rem 0.75rem; text-decoration: none;
+  background: var(--shell); color: #fff;
+  border: 2px solid var(--shell-edge); border-radius: 4px;
+  box-shadow: var(--bevel), 0 3px 0 var(--shell-edge);
+  &:hover { color: #fff; filter: brightness(1.08); }
+  &:active { transform: translateY(2px); box-shadow: var(--bevel), 0 1px 0 var(--shell-edge); }
+}
+.shortcut__label { font-family: var(--font-ui); font-size: 1.05rem; text-transform: uppercase; }
+.shortcut__hint { font-size: 0.82rem; color: #ffe1dc; }
+
+@media (max-width: 900px) {
+  .hero, .cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .lcd { grid-template-columns: repeat(2, 1fr); }
+}

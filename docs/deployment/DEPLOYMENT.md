@@ -31,8 +31,8 @@ reset role;
 
 1. Sube el repositorio a GitHub.
 2. En Vercel: **Add New → Project → Import** el repositorio. `vercel.json` ya define:
-   - install: `npm ci --prefix frontend`
-   - build: `npm run build --prefix frontend` (ejecuta `scripts/set-env.mjs` antes)
+   - install: `cd frontend && npm ci`
+   - build: `cd frontend && npm run build` (ejecuta `scripts/set-env.mjs` antes)
    - output: `frontend/dist/frontend/browser`
    - reescritura SPA hacia `index.html` y cabeceras de seguridad.
 3. **Settings → Environment Variables** (Production y Preview):

@@ -74,3 +74,16 @@ nunca van al frontend: viven en Supabase o en la máquina que ejecuta el importa
 - Blizzard API: [`docs/api/BLIZZARD.md`](docs/api/BLIZZARD.md)
 - Arquitectura: [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md)
 - Diseño visual: [`docs/architecture/DESIGN.md`](docs/architecture/DESIGN.md)
+
+## Créditos y licencias de los datos
+
+| Fuente | Uso en MountDex | Licencia / condiciones |
+|---|---|---|
+| [Blizzard](https://community.developer.battle.net/) | Iconos oficiales (render CDN); renders y colecciones vía API cuando hay credenciales | Blizzard Developer API Terms of Use |
+| [wago.tools](https://wago.tools) | Tablas del cliente de WoW: nombres, descripciones, texto de origen, jefes, instancias, coordenadas del Diario | Datos del cliente de Blizzard |
+| [Simple Armory](https://github.com/kevinclement/SimpleArmory) | Lista de monturas coleccionables, expansión, categoría, icono, facción | MIT © Kevin Clement |
+| [Rarity](https://github.com/WowRarity/Rarity) | Probabilidades de drop **comunitarias** y coordenadas | GPL-2.0 (se usan hechos con atribución, no código) |
+| [Warcraft Wiki](https://warcraft.wiki.gg) | Enlaces verificados por API | CC BY-SA 4.0 (solo enlaces) |
+| [Wowhead](https://www.wowhead.com) | Enlaces | Sin extracción de datos |
+
+Importador y detalles: [`docs/architecture/DATA-INTEGRATION.md`](docs/architecture/DATA-INTEGRATION.md).

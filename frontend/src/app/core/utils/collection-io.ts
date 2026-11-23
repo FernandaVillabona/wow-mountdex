@@ -11,6 +11,21 @@ export function mergeCollections(a: CollectionMap, b: CollectionMap): Collection
   return out;
 }
 
+/**
+ * Renumera una colección según un mapa id_antiguo → id_nuevo (catálogo de demo → IDs oficiales).
+ * Si el destino ya tiene registro, se conserva el más reciente.
+ */
+export function remapIds(col: CollectionMap, mapping: Record<string, number>): CollectionMap {
+  const moved: CollectionMap = {};
+  const rest: CollectionMap = {};
+  for (const [key, entry] of Object.entries(col)) {
+    const to = mapping[key];
+    if (to !== undefined) moved[to] = { ...entry, mountId: to };
+    else rest[Number(key)] = entry;
+  }
+  return mergeCollections(rest, moved);
+}
+
 /** Un registro "vacío" no necesita guardarse. */
 export function isMeaningful(s: UserMountState): boolean {
   return s.obtained || s.favorite || s.target || s.notes.trim() !== '' || s.attempts > 0;

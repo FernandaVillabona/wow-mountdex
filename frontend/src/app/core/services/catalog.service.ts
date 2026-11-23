@@ -1,8 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Catalog, Expansion, Location, Mount } from '../models/catalog.models';
+import { Catalog, DataSource, Expansion, FieldProvenance, Location, Mount } from '../models/catalog.models';
 import { searchableText } from '../utils/mount-filters';
 import { SupabaseService } from './supabase.service';
-import { mapCatalogRows } from './catalog.mapper';
+import { mapCatalogRows, mapProvenance } from './catalog.mapper';
 
 type LoadState = 'idle' | 'loading' | 'ready' | 'error';
 
@@ -66,13 +66,45 @@ export class CatalogService {
 
   private async loadFromSupabase(): Promise<Catalog> {
     const db = await this.supabase.client();
-    const [exp, loc, mnt] = await Promise.all([
-      db.from('expansions').select('*'),
-      db.from('locations').select('*'),
-      db.from('mounts').select('*, mount_sources(*), mount_locations(location_id), mount_references(label, url)').order('id'),
+    // Supabase devuelve como máximo 1000 filas por petición: se pagina.
+    const PAGE = 500;
+    const pageOf = (table: string, select: string, from: number) =>
+      db.from(table).select(select).order('id').range(from, from + PAGE - 1);
+    const all = async (table: string, select: string) => {
+      const rows: Record<string, unknown>[] = [];
+      for (let from = 0; ; from += PAGE) {
+        const { data, error } = await pageOf(table, select, from);
+        if (error) throw error;
+        rows.push(...((data ?? []) as unknown as Record<string, unknown>[]));
+        if (!data || data.length < PAGE) return rows;
+      }
+    };
+    const [exp, loc, mnt, src] = await Promise.all([
+      all('expansions', '*'),
+      all('locations', '*'),
+      all('mounts', '*, mount_sources(*), mount_locations(location_id), mount_references(label, url)'),
+      // data_sources existe a partir de la migración 003; si falta, se continúa sin ella.
+      all('data_sources', '*').catch(() => []),
     ]);
-    if (exp.error || loc.error || mnt.error) throw exp.error ?? loc.error ?? mnt.error;
-    return mapCatalogRows(exp.data, loc.data, mnt.data);
+    return mapCatalogRows(exp, loc, mnt, src);
+  }
+
+  /** Procedencia por campo de una montura (en Supabase se pide bajo demanda; en el JSON viene incluida). */
+  async provenanceOf(m: Mount): Promise<Record<string, FieldProvenance>> {
+    if (m.provenance) return m.provenance;
+    if (this.origin() !== 'supabase') return {};
+    try {
+      const db = await this.supabase.client();
+      const { data, error } = await db.from('field_provenance').select('*').eq('mount_id', m.id);
+      return error || !data ? {} : mapProvenance(data);
+    } catch {
+      return {};
+    }
+  }
+
+  dataSource(id: string | null | undefined): DataSource | null {
+    if (!id) return null;
+    return this.catalog()?.dataSources?.find((s) => s.id === id) ?? null;
   }
 
   expansionOf(m: Mount): Expansion | null {

@@ -137,7 +137,13 @@ export function extractLuaTables(src) {
 /** Limpia códigos de color/texturas del cliente (|cFFxxxxxx, |r, |n, |T...|t). */
 export function cleanClientText(s) {
   return (s ?? '')
-    .replace(/\|T[^|]*\|t/g, '')
+    // Monedas: el cliente usa iconos en lugar de texto ("1|T...GOLDICON|t" = 1 de oro).
+    .replace(/\|T[^|]*GOLDICON[^|]*\|t/gi, ' oro')
+    .replace(/\|T[^|]*SILVERICON[^|]*\|t/gi, ' plata')
+    .replace(/\|T[^|]*COPPERICON[^|]*\|t/gi, ' cobre')
+    .replace(/\|T[^|]*PVPCurrency-Honor[^|]*\|t/gi, ' honor')
+    // Otros iconos (monedas especiales, emblemas): se indica que hay un icono en lugar de perder el dato.
+    .replace(/\|T[^|]*\|t/g, ' [icono]')
     .replace(/\|c[0-9A-Fa-f]{8}/g, '')
     .replace(/\|r/g, '')
     .replace(/\|n/g, '\n')

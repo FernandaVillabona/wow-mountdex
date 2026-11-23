@@ -53,7 +53,9 @@
           <dt>Disponibilidad</dt><dd [class.unknown]="m.availability === 'unknown'">{{ L.availability[m.availability] }}</dd>
           <dt>Rareza</dt><dd>@if (m.rarity) { {{ L.rarity[m.rarity] }} } @else { <span class="unknown">Sin clasificar</span> }</dd>
           <dt>Facción</dt><dd>{{ m.faction === 'alliance' ? 'Alianza' : m.faction === 'horde' ? 'Horda' : 'Ambas / no indicado' }}</dd>
-          <dt>Modelo 3D</dt><dd><span class="unknown">Vista previa no disponible</span></dd>
+          <dt>Render del modelo</dt><dd>@if (m.imageUrl) { Oficial (Blizzard) } @else { <span class="unknown">No disponible (requiere Blizzard API)</span> }</dd>
+          @if (m.spellId) { <dt>ID de hechizo</dt><dd>{{ m.spellId }}</dd> }
+          @if (m.itemId) { <dt>ID de objeto</dt><dd>{{ m.itemId }}</dd> }
         </dl>
       </section>
 
@@ -65,7 +67,13 @@
             <span class="prob__status">{{ L.probability[m.probability.status] }}</span>
           </div>
           <dl class="dl">
-            <dt>Fuente</dt><dd>@if (m.probability.source) { {{ m.probability.source }} } @else { <span class="unknown">—</span> }</dd>
+            <dt>Fuente</dt>
+            <dd>
+              @if (m.probability.source) {
+                @if (m.probability.sourceUrl) { <a [href]="m.probability.sourceUrl" target="_blank" rel="noopener noreferrer">{{ m.probability.source }}</a> }
+                @else { {{ m.probability.source }} }
+              } @else { <span class="unknown">—</span> }
+            </dd>
             <dt>Intentos medios</dt><dd>@if (m.probability.knownAttempts) { {{ m.probability.knownAttempts }} } @else { <span class="unknown">Desconocido</span> }</dd>
             <dt>Bloqueo</dt><dd>{{ m.lockout === 'weekly' ? 'Semanal' : m.lockout === 'daily' ? 'Diario' : m.lockout === 'none' ? 'Sin bloqueo' : 'No verificado' }}</dd>
             <dt>Intentos limitados</dt><dd>{{ m.limitedAttempts ? 'Sí' : 'No indicado' }}</dd>
@@ -79,17 +87,38 @@
     <section class="panel">
       <div class="panel__title"><h2>Obtención</h2></div>
       <div class="panel__body">
+        @if (m.sourceText) {
+          <figure class="journal">
+            <figcaption>Diario de monturas <span class="badge badge--green">Oficial</span></figcaption>
+            <pre>{{ m.sourceText }}</pre>
+          </figure>
+        }
         @for (s of m.sources; track $index) {
           <dl class="dl source">
-            <dt>Método</dt><dd>{{ L.method[s.sourceType] }}</dd>
+            <dt>Método</dt>
+            <dd>
+              {{ L.method[s.sourceType] }}
+              @if (s.trust) { <span class="badge" [class]="'badge trust trust--' + s.trust">{{ L.trust[s.trust] }}</span> }
+              @if (catalog.dataSource(s.dataSourceId); as ds) { <span class="faint">· {{ ds.name }}</span> }
+            </dd>
             @if (s.bossName) { <dt>Jefe</dt><dd>{{ s.bossName }}</dd> }
+            @if (s.instanceName) { <dt>Instancia</dt><dd>{{ s.instanceName }}</dd> }
+            @if (s.zoneName) { <dt>Zona</dt><dd>{{ s.zoneName }}</dd> }
+            @if (s.mapX !== null && s.mapX !== undefined && s.mapY !== null && s.mapY !== undefined) {
+              <dt>Coordenadas</dt>
+              <dd>
+                {{ s.mapX }}, {{ s.mapY }}
+                <span class="faint">({{ s.coordinatesKind === 'instance' ? 'mapa de la instancia' : 'mapa de mundo' }}@if (s.uiMapId) { · UiMap {{ s.uiMapId }} })</span>
+              </dd>
+            }
+            @if (s.npcId) { <dt>ID de NPC</dt><dd>{{ s.npcId }}</dd> }
             @if (s.npcName) { <dt>NPC</dt><dd>{{ s.npcName }}</dd> }
             @if (s.vendorName) { <dt>Vendedor</dt><dd>{{ s.vendorName }}</dd> }
             @if (s.achievementName) { <dt>Logro</dt><dd>{{ s.achievementName }}</dd> }
             @if (s.reputationRequirement) { <dt>Reputación</dt><dd>{{ s.reputationRequirement }}</dd> }
             @if (s.currencyRequirement) { <dt>Moneda</dt><dd>{{ s.currencyRequirement }}</dd> }
             @if (s.requirements) { <dt>Requisitos</dt><dd>{{ s.requirements }}</dd> }
-            @if (s.instructions) { <dt>Guía</dt><dd>{{ s.instructions }}</dd> }
+            @if (s.instructions && !m.sourceText) { <dt>Guía</dt><dd>{{ s.instructions }}</dd> }
             @if (s.sourceUrl) { <dt>Fuente</dt><dd><a [href]="s.sourceUrl" target="_blank" rel="noopener noreferrer">{{ s.sourceUrl }}</a></dd> }
           </dl>
         } @empty {
@@ -162,6 +191,23 @@
             <li><a [href]="r.url" target="_blank" rel="noopener noreferrer">{{ r.label }} ↗</a></li>
           }
         </ul>
+        @if (provenance().length) {
+          <h3 class="prov__title">Procedencia de cada dato</h3>
+          <div class="prov" role="table" aria-label="Procedencia de los datos">
+            <div class="prov__row prov__head" role="row">
+              <span role="columnheader">Dato</span><span role="columnheader">Fuente</span><span role="columnheader">Confianza</span><span role="columnheader">Consulta</span>
+            </div>
+            @for (p of provenance(); track p.field) {
+              <div class="prov__row" role="row">
+                <span role="cell">{{ p.label }}</span>
+                <span role="cell">@if (p.url) { <a [href]="p.url" target="_blank" rel="noopener noreferrer">{{ p.sourceName }}</a> } @else { {{ p.sourceName }} }</span>
+                <span role="cell"><span class="badge" [class]="'badge trust trust--' + p.trust">{{ L.trust[p.trust] }}</span></span>
+                <span role="cell" class="faint">{{ formatDate(p.fetchedAt) }}</span>
+              </div>
+            }
+          </div>
+        }
+        @if (m.category) { <p class="faint">Categoría (Simple Armory): {{ m.category }}</p> }
       </div>
     </section>
   </article>

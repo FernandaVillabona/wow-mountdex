@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostListener, computed, effect, inject, input, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 import {
   AVAILABILITY_LABELS,
   DIFFICULTY_LABELS,
+  FIELD_LABELS,
+  FieldProvenance,
   METHOD_LABELS,
+  TRUST_LABELS,
   MOUNT_TYPE_LABELS,
   PROBABILITY_STATUS_LABELS,
   RARITY_LABELS,
@@ -25,7 +28,7 @@ import { MountSpriteComponent } from '../../shared/components/mount-sprite.compo
   styleUrl: './mount-detail.component.scss',
 })
 export class MountDetailComponent {
-  private readonly catalog = inject(CatalogService);
+  protected readonly catalog = inject(CatalogService);
   protected readonly collection = inject(CollectionService);
   protected readonly prefs = inject(PreferencesService);
   private readonly toast = inject(ToastService);
@@ -53,9 +56,28 @@ export class MountDetailComponent {
     availability: AVAILABILITY_LABELS,
     probability: PROBABILITY_STATUS_LABELS,
     type: MOUNT_TYPE_LABELS,
+    trust: TRUST_LABELS,
   };
 
+  /** Procedencia por campo, cargada bajo demanda. */
+  private readonly provenanceMap = signal<Record<string, FieldProvenance>>({});
+  protected readonly provenance = computed(() =>
+    Object.entries(this.provenanceMap()).map(([field, p]) => ({
+      field,
+      label: FIELD_LABELS[field] ?? field,
+      sourceName: this.catalog.dataSource(p.source)?.name ?? p.source,
+      url: p.url,
+      trust: p.trust,
+      fetchedAt: p.fetchedAt,
+    })),
+  );
+
   constructor() {
+    effect(() => {
+      const m = this.mount();
+      this.provenanceMap.set({});
+      if (m) void this.catalog.provenanceOf(m).then((p) => { if (this.mount()?.id === m.id) this.provenanceMap.set(p); });
+    });
     effect(() => {
       const m = this.mount();
       if (m) {

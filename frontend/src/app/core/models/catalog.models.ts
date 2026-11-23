@@ -51,6 +51,8 @@ export interface Location {
   coordinates: string | null;
 }
 
+export type Trust = 'official' | 'verified' | 'community' | 'pending' | 'outdated' | 'unknown';
+
 export interface MountSource {
   sourceType: AcquisitionMethod;
   npcName: string | null;
@@ -62,6 +64,19 @@ export interface MountSource {
   requirements: string | null;
   instructions: string | null;
   sourceUrl: string | null;
+  // Campos del importador (opcionales para compatibilidad con el catálogo de demostración)
+  npcId?: number | null;
+  encounterId?: number | null;
+  instanceId?: number | null;
+  instanceName?: string | null;
+  zoneName?: string | null;
+  uiMapId?: number | null;
+  mapX?: number | null;
+  mapY?: number | null;
+  /** 'instance' = mapa de la mazmorra/banda; 'world' = mapa exterior. */
+  coordinatesKind?: 'instance' | 'world' | null;
+  dataSourceId?: string | null;
+  trust?: Trust | null;
 }
 
 export interface Probability {
@@ -71,6 +86,32 @@ export interface Probability {
   source: string | null;
   /** Intentos medios reportados, si existe una fuente. */
   knownAttempts: number | null;
+  sourceUrl?: string | null;
+}
+
+export interface MountMedia {
+  kind: 'icon' | 'render' | 'zoom';
+  url: string;
+  resourceId: string | null;
+  dataSourceId: string;
+  status: 'verified' | 'unverified' | 'broken';
+  checkedAt: string | null;
+}
+
+export interface FieldProvenance {
+  source: string;
+  url: string | null;
+  trust: Trust;
+  infoType: string;
+  fetchedAt: string;
+}
+
+export interface DataSource {
+  id: string;
+  name: string;
+  url: string;
+  kind: 'official' | 'client-data' | 'community' | 'reference';
+  license?: string | null;
 }
 
 export interface ExternalReference {
@@ -103,6 +144,13 @@ export interface Mount {
   references: ExternalReference[];
   verifiedAt: string | null;
   isDemo: boolean;
+  spellId?: number | null;
+  itemId?: number | null;
+  /** Texto de origen oficial del Diario de monturas (cliente de WoW). */
+  sourceText?: string | null;
+  category?: string | null;
+  media?: MountMedia[];
+  provenance?: Record<string, FieldProvenance>;
 }
 
 export interface Catalog {
@@ -113,7 +161,34 @@ export interface Catalog {
   expansions: Expansion[];
   locations: Location[];
   mounts: Mount[];
+  /** IDs del catálogo de demostración → ID oficial (para migrar colecciones locales). */
+  legacyIds?: Record<string, number>;
+  dataSources?: DataSource[];
 }
+
+export const TRUST_LABELS: Record<Trust, string> = {
+  official: 'Oficial',
+  verified: 'Verificado',
+  community: 'Comunitario',
+  pending: 'Pendiente de verificar',
+  outdated: 'Desactualizado',
+  unknown: 'Desconocido',
+};
+
+export const FIELD_LABELS: Record<string, string> = {
+  name: 'Nombre',
+  description: 'Descripción',
+  source_text: 'Texto de origen',
+  mount_type: 'Tipo de montura',
+  acquisition_methods: 'Método de obtención',
+  sources: 'Jefe / NPC / ubicación',
+  expansion: 'Expansión',
+  availability: 'Disponibilidad',
+  faction: 'Facción',
+  probability: 'Probabilidad de drop',
+  icon: 'Icono',
+  image: 'Render del modelo',
+};
 
 export const METHOD_LABELS: Record<AcquisitionMethod, string> = {
   world_boss: 'Jefe de mundo',

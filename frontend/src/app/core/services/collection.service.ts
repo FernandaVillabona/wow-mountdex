@@ -1,6 +1,6 @@
 import { Injectable, computed, effect, inject, signal, untracked } from '@angular/core';
 import { CollectionMap, UserMountState, emptyState } from '../models/collection.models';
-import { isMeaningful, mergeCollections } from '../utils/collection-io';
+import { isMeaningful, mergeCollections, remapIds } from '../utils/collection-io';
 import { AuthService } from './auth.service';
 import { StorageService } from './storage.service';
 import { SupabaseService } from './supabase.service';
@@ -10,6 +10,7 @@ export type SyncStatus = 'local' | 'syncing' | 'synced' | 'error';
 export type StatePatch = Partial<Omit<UserMountState, 'mountId' | 'updatedAt'>>;
 
 const GUEST_KEY = 'collection:guest';
+const LEGACY_KEY = 'collection:legacy-migrated';
 const userKey = (uid: string) => `collection:user:${uid}`;
 
 @Injectable({ providedIn: 'root' })
@@ -84,6 +85,23 @@ export class CollectionService {
     const now = new Date().toISOString();
     this.applyMany(fresh.map((id) => ({ ...this.get(id), obtained: true, obtainedAt: this.get(id).obtainedAt ?? now })));
     return fresh.length;
+  }
+
+  /**
+   * Migra una sola vez las colecciones guardadas en este navegador desde los IDs del catálogo de
+   * demostración a los IDs oficiales. Las filas en la nube las renumera la base de datos (ON UPDATE CASCADE).
+   */
+  migrateLegacyIds(mapping: Record<string, number>, version: string): boolean {
+    if (!Object.keys(mapping).length || this.storage.get<string | null>(LEGACY_KEY, null) === version) return false;
+    const guest = this.storage.get<CollectionMap>(GUEST_KEY, {});
+    if (Object.keys(guest).length) this.storage.set(GUEST_KEY, remapIds(guest, mapping));
+    if (this.uid) {
+      const cached = this.storage.get<CollectionMap>(userKey(this.uid), {});
+      if (Object.keys(cached).length) this.storage.set(userKey(this.uid), remapIds(cached, mapping));
+    }
+    this.collection.update((c) => remapIds(c, mapping));
+    this.storage.set(LEGACY_KEY, version);
+    return true;
   }
 
   // ───────── Persistencia ─────────

@@ -24,3 +24,4 @@ Thumbs.db
 # Caché e informes del importador
 .cache/
 reports/
+!.env.importer.example

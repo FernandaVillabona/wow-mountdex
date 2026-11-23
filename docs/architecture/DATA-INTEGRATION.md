@@ -70,3 +70,40 @@ Principios:
 - Coordenadas de **mundo** de vendedores y NPC: el cliente no las expone en tablas descargadas; solo hay coordenadas de jefes en mapas de instancia (Encounter Journal) y las coordenadas comunitarias de Rarity.
 - Probabilidades **oficiales**: Blizzard no las publica salvo excepciones; solo hay estimaciones comunitarias.
 - Renders 3D: requieren credenciales de Blizzard.
+
+## 6. Uso del importador
+
+```bash
+node scripts/importer/index.mjs                # dry-run: descarga, normaliza e informa (no escribe)
+node scripts/importer/index.mjs --write-json   # + genera frontend/public/data/catalog.json y legacy-ids.json
+node scripts/importer/index.mjs --apply        # + escribe en Supabase (requiere .env.importer)
+```
+
+Opciones: `--offline` (solo caché), `--skip-icons`, `--ttl <horas>`. Informes en `reports/` (no versionados).
+Antes de `--apply` hay que ejecutar la migración `20261122000003_provenance_media.sql`.
+
+`--apply` renumera las 27 monturas de demostración a su ID oficial (paso intermedio por IDs negativos);
+las colecciones en la nube se actualizan solas por `ON UPDATE CASCADE`, y las guardadas en el navegador
+se migran una vez con `data/legacy-ids.json`.
+
+## 7. Resultado de la última importación (dry-run, 2026-11-23)
+
+| Métrica | Valor |
+|---|---|
+| Monturas encontradas (coleccionables) | 1658 |
+| Descartadas (pruebas / no coleccionables) | 58 |
+| Nombres duplicados (revisión manual) | 29 |
+| Sin imagen (ni icono ni render) | 85 |
+| Sin render del modelo | 1658 |
+| Sin método de obtención | 13 |
+| Sin ubicación | 877 |
+| Sin información de probabilidad | 1462 |
+| Sin expansión | 807 |
+| Con jefe del Diario de encuentros | 67 |
+| Con coordenadas | 82 |
+| Ubicaciones distintas | 202 |
+Notas:
+- **Sin render del modelo (1658)**: requiere credenciales de la Blizzard API.
+- **Sin probabilidad (1462)**: solo hay estimaciones comunitarias (Rarity) para monturas de drop raro; el resto se muestra como "Probabilidad desconocida".
+- **Sin expansión (807)**: monturas que ni el Diario de encuentros ni Simple Armory asignan a una expansión (tienda, promociones, profesiones, JcJ…).
+- **Con jefe del Diario (67)**: son todas las monturas que aparecen en las tablas de botín del Diario de encuentros; el resto de jefes procede del texto oficial de origen.

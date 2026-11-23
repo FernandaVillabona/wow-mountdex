@@ -1,5 +1,5 @@
 import { METHOD_LABELS } from '../models/catalog.models';
-import { importCsv, importJson, isMeaningful, mergeCollections, parseCsv, toCsv, toExport } from './collection-io';
+import { importCsv, importJson, isMeaningful, mergeCollections, parseCsv, remapIds, toCsv, toExport } from './collection-io';
 import { byContinent, byExpansion, byMethod, overall } from './collection-stats';
 import { computeMilestones } from './milestones';
 import { catalog, mount, st } from './test-fixtures';
@@ -43,6 +43,20 @@ describe('fusión local ↔ nube', () => {
   it('detecta registros vacíos', () => {
     expect(isMeaningful(st(1))).toBeFalse();
     expect(isMeaningful(st(1, { notes: 'x' }))).toBeTrue();
+  });
+});
+
+describe('remapIds (demo → ID oficial)', () => {
+  it('mueve los registros, conserva el resto y no duplica', () => {
+    const col = {
+      4: st(4, { obtained: true, updatedAt: '2026-01-02T00:00:00Z' }),
+      6: st(6, { favorite: true }),
+      183: st(183, { notes: 'antiguo', updatedAt: '2025-01-01T00:00:00Z' }),
+    };
+    const out = remapIds(col, { '4': 183, '6': 160 });
+    expect(Object.keys(out).sort()).toEqual(['160', '183']);
+    expect(out[183]).toEqual(jasmine.objectContaining({ mountId: 183, obtained: true }));
+    expect(out[160].favorite).toBeTrue();
   });
 });
 

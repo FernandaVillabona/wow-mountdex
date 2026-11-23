@@ -12,7 +12,7 @@ import { Mount } from '../../core/models/catalog.models';
   template: `
     <div class="sprite" [class.pending]="!obtained()" [style.--c]="color()" [style.--s.px]="size()">
       @if (src() && !failed()) {
-        <img [src]="src()" [alt]="alt()" loading="lazy" (error)="failed.set(true)" />
+        <img [src]="src()" [alt]="alt()" loading="lazy" [class.upscaled]="size() > 56 && src() === mount().iconUrl" (error)="failed.set(true)" />
       } @else {
         <span class="initials" role="img" [attr.aria-label]="alt()">{{ initials() }}</span>
       }
@@ -32,6 +32,8 @@ import { Mount } from '../../core/models/catalog.models';
     }
     .pending { filter: grayscale(1) brightness(.85) contrast(.9); }
     img { width: 100%; height: 100%; object-fit: cover; image-rendering: auto; }
+    /* El CDN oficial sirve iconos de 56 px como máximo: al ampliarlos se pixelan en vez de difuminarse. */
+    img.upscaled { image-rendering: pixelated; }
     .initials {
       font-family: var(--font-logo); color: #fff; line-height: 1;
       font-size: calc(var(--s) * 0.26); text-shadow: 2px 2px 0 rgba(0,0,0,.45);

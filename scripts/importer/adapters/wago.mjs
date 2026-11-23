@@ -54,21 +54,32 @@ export async function loadWago(http, log) {
     displaysByMount.set(m, [...(displaysByMount.get(m) ?? []), num(d.CreatureDisplayInfoID)]);
   }
 
-  /** Zonas exteriores (ParentAreaID = 0) por nombre; solo nombres únicos. */
-  const zoneByName = new Map();
-  const dupes = new Set();
-  for (const a of t.AreaTable) {
-    if (num(a.ParentAreaID) !== 0) continue;
-    const n = a.AreaName_lang;
-    if (zoneByName.has(n)) dupes.add(n); else zoneByName.set(n, a);
-  }
-  dupes.forEach((n) => zoneByName.delete(n));
+  /**
+   * Continentes reales, deducidos de los datos: mapas de mundo abierto (InstanceType 0) con al menos
+   * 8 zonas de primer nivel. Así se descartan copias faseadas o de escenario (p. ej. "Arathi Highlands 3").
+   */
+  const topZonesPerMap = new Map();
+  for (const a of t.AreaTable) if (num(a.ParentAreaID) === 0) topZonesPerMap.set(num(a.ContinentID), (topZonesPerMap.get(num(a.ContinentID)) ?? 0) + 1);
+  const isContinent = (mapId) => {
+    const map = maps.get(mapId);
+    return !!map && num(map.InstanceType) === 0 && (topZonesPerMap.get(mapId) ?? 0) >= 8;
+  };
 
   const continentName = (area) => {
-    const map = area ? maps.get(num(area.ContinentID)) : null;
-    // Solo mapas de mundo abierto (InstanceType 0) se consideran continente.
-    return map && num(map.InstanceType) === 0 ? map.MapName_lang : null;
+    const id = area ? num(area.ContinentID) : null;
+    return id !== null && isContinent(id) ? maps.get(id).MapName_lang : null;
   };
+
+  /** Zonas de primer nivel por nombre; se acepta el nombre solo si todas sus apariciones caen en un único continente. */
+  const zoneByName = new Map();
+  const candidates = new Map();
+  for (const a of t.AreaTable) {
+    if (num(a.ParentAreaID) !== 0 || !isContinent(num(a.ContinentID))) continue;
+    candidates.set(a.AreaName_lang, [...(candidates.get(a.AreaName_lang) ?? []), a]);
+  }
+  for (const [name, list] of candidates) {
+    if (new Set(list.map((a) => num(a.ContinentID))).size === 1) zoneByName.set(name, list[0]);
+  }
 
   /** Expansión del Encounter Journal: Expansion = 100 → Classic (id 1) … 1200 → Midnight (id 12). */
   const expansionOfInstance = (instanceId) => {

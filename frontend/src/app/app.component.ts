@@ -57,6 +57,20 @@ export class AppComponent {
 
   constructor() {
     void this.auth.init();
-    void this.catalog.load();
+    void this.catalog.load().then(() => this.migrateLegacyCollection());
+  }
+
+  /** Si el catálogo ya usa IDs oficiales, migra una vez las colecciones locales del catálogo de demo. */
+  private async migrateLegacyCollection(): Promise<void> {
+    const cat = this.catalog.catalog();
+    if (!cat || cat.isDemo) return;
+    try {
+      const res = await fetch('data/legacy-ids.json', { cache: 'no-cache' });
+      if (!res.ok) return;
+      const { version, mapping } = (await res.json()) as { version: string; mapping: Record<string, number> };
+      if (this.collection.migrateLegacyIds(mapping, version)) this.prefs.remapRecent(mapping);
+    } catch {
+      /* sin mapa de migración: nada que hacer */
+    }
   }
 }

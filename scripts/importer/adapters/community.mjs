@@ -84,6 +84,7 @@ export async function loadRarity(http, log) {
           : [];
         bySpell.set(entry.spellId, {
           spellId: entry.spellId,
+          itemName: typeof entry.name === 'string' ? entry.name : null,
           chance, // 1 de cada N
           npcIds: Array.isArray(entry.npcs) ? entry.npcs.filter((n) => typeof n === 'number' && n !== 99999) : [],
           lockBossName: typeof entry.lockBossName === 'string' ? entry.lockBossName : null,

@@ -32,6 +32,12 @@ export class PreferencesService {
     this.storage.set('recent', list);
   }
 
+  remapRecent(mapping: Record<string, number>): void {
+    const list = [...new Set(untracked(this.recent).map((id) => mapping[String(id)] ?? id))];
+    this.recent.set(list);
+    this.storage.set('recent', list);
+  }
+
   /** Pitidos sintetizados con Web Audio (sin archivos de audio externos). */
   beep(kind: 'nav' | 'confirm' | 'back' = 'nav'): void {
     if (!this.soundOn()) return;

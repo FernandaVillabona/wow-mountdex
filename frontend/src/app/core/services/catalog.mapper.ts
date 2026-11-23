@@ -1,5 +1,5 @@
 /* Mapeo filas SQL (snake_case) → modelos de dominio. */
-import { Catalog, Expansion, Location, Mount, MountSource } from '../models/catalog.models';
+import { Catalog, DataSource, Expansion, FieldProvenance, Location, Mount, MountSource } from '../models/catalog.models';
 
 type Row = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
@@ -23,7 +23,22 @@ function mapSource(r: Row): MountSource {
     achievementName: r['achievement_name'], reputationRequirement: r['reputation_requirement'],
     currencyRequirement: r['currency_requirement'], requirements: r['requirements'],
     instructions: r['instructions'], sourceUrl: r['source_url'],
+    npcId: r['npc_id'] ?? null, encounterId: r['encounter_id'] ?? null, instanceId: r['instance_id'] ?? null,
+    instanceName: r['instance_name'] ?? null, zoneName: r['zone_name'] ?? null, uiMapId: r['ui_map_id'] ?? null,
+    mapX: r['map_x'] === null || r['map_x'] === undefined ? null : Number(r['map_x']),
+    mapY: r['map_y'] === null || r['map_y'] === undefined ? null : Number(r['map_y']),
+    coordinatesKind: r['coordinates_kind'] ?? null, dataSourceId: r['data_source_id'] ?? null, trust: r['trust'] ?? null,
   };
+}
+
+export function mapProvenance(rows: Row[]): Record<string, FieldProvenance> {
+  return Object.fromEntries(
+    rows.map((r) => [r['field'], { source: r['data_source_id'], url: r['source_url'], trust: r['trust'], infoType: r['info_type'], fetchedAt: r['fetched_at'] }]),
+  );
+}
+
+export function mapDataSource(r: Row): DataSource {
+  return { id: r['id'], name: r['name'], url: r['url'], kind: r['kind'], license: r['license'] };
 }
 
 export function mapMount(r: Row): Mount {
@@ -44,10 +59,14 @@ export function mapMount(r: Row): Mount {
     references: r['mount_references'] ?? [],
     verifiedAt: r['source_verified_at'],
     isDemo: r['is_demo'],
+    spellId: r['spell_id'] ?? null,
+    itemId: r['item_id'] ?? null,
+    sourceText: r['source_text'] ?? null,
+    category: r['category'] ?? null,
   };
 }
 
-export function mapCatalogRows(exp: Row[], loc: Row[], mounts: Row[]): Catalog {
+export function mapCatalogRows(exp: Row[], loc: Row[], mounts: Row[], sources: Row[] = []): Catalog {
   const mapped = mounts.map(mapMount);
   const isDemo = mapped.length > 0 && mapped.every((m) => m.isDemo);
   return {
@@ -58,5 +77,6 @@ export function mapCatalogRows(exp: Row[], loc: Row[], mounts: Row[]): Catalog {
     expansions: exp.map(mapExpansion),
     locations: loc.map(mapLocation),
     mounts: mapped,
+    dataSources: sources.map(mapDataSource),
   };
 }

@@ -17,7 +17,12 @@ export class CatalogService {
 
   readonly mounts = computed(() => this.catalog()?.mounts ?? []);
   readonly expansions = computed(() => [...(this.catalog()?.expansions ?? [])].sort((a, b) => a.sortOrder - b.sortOrder));
-  readonly locations = computed(() => this.catalog()?.locations ?? []);
+  readonly allLocations = computed(() => this.catalog()?.locations ?? []);
+  /** Solo ubicaciones con alguna montura (evita entradas huérfanas en filtros y selectores). */
+  readonly locations = computed(() => {
+    const used = new Set(this.mounts().flatMap((m) => m.locationIds));
+    return this.allLocations().filter((l) => used.has(l.id));
+  });
 
   readonly mountById = computed(() => new Map(this.mounts().map((m) => [m.id, m])));
   readonly mountBySlug = computed(() => new Map(this.mounts().map((m) => [m.slug, m])));
